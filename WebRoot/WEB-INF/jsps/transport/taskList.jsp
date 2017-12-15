@@ -54,7 +54,7 @@
 
 						<td>发货方式:</td>
 						<td>
-							<s:select  list="#{'1':'送货','2':'自提'}" name="query.supplier.needs" cssStyle="width:115px"  headerKey="" headerValue="----请选择----" />
+							<s:select  list="#{'1':'自提','2':'送货'}" name="query.needs" cssStyle="width:115px"  headerKey="" headerValue="----请选择----" />
 						</td>
 						<td>审核人:</td>
 						<td><td> <s:textfield name="query.checkterName" type="text" size="10" /> <td></td>

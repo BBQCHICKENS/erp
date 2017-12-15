@@ -9,6 +9,8 @@ public class OrderModelQuery extends OrderModel{
 	private Integer pageNo;
 	
 	private Integer startNum;
+
+	private Integer needs;
 	
 	private String  createrName;
 	private  String compterName;
@@ -30,6 +32,13 @@ public class OrderModelQuery extends OrderModel{
 	private Date minCheckTime;
 	private  Date maxCheckTime;
 
+    public Integer getNeeds() {
+        return needs;
+    }
+
+    public void setNeeds(Integer needs) {
+        this.needs = needs;
+    }
 
     public String getCompterName() {
         return compterName;
