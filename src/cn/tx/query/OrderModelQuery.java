@@ -10,7 +10,9 @@ public class OrderModelQuery extends OrderModel{
 	
 	private Integer startNum;
 	
-	private String createrName;
+	private String  createrName;
+	private  String compterName;
+    private  String checkterName;
 	
 	private Integer minTotalNum;
 	
@@ -29,7 +31,23 @@ public class OrderModelQuery extends OrderModel{
 	private  Date maxCheckTime;
 
 
-	public Date getMinCheckTime() {
+    public String getCompterName() {
+        return compterName;
+    }
+
+    public void setCompterName(String compterName) {
+        this.compterName = compterName;
+    }
+
+    public String getCheckterName() {
+        return checkterName;
+    }
+
+    public void setCheckterName(String checkterName) {
+        this.checkterName = checkterName;
+    }
+
+    public Date getMinCheckTime() {
 		return minCheckTime;
 	}
 

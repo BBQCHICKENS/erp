@@ -92,8 +92,7 @@ public class AssignTaskAction extends BaseAction {
 		if(pageNo == null ){
 			query.setPageNo(1);
 		}
-		//只查询审核通过的单子
-		query.setOrderState(2);
+		//只查询审核通过的单子;
 		exclude.add("orderCreater");
 		exclude.add("supplier");
 		exclude.add("logs");

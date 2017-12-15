@@ -16,7 +16,9 @@
 		</div>
 	</div>
 	<div class="content-text">
-		<form action="taskList.jsp" method="post"> 
+		<form action="${path}/assignTask_taskList" method="post">
+            <input type="hidden" name="query.orderType" value="1">
+            <input type="hidden" name="query.orderState" value="2">
 			<div class="square-o-top">
 				<table width="100%" border="0" cellpadding="0" cellspacing="0"
 					style="font-size:14px; font-weight:bold; font-family:"黑体";">
@@ -34,7 +36,7 @@
 							<s:select list="#suppliers" name="query.supplierId" cssStyle="width:115px" headerKey="" headerValue="----请-选-择----" listKey="supplierId" listValue="name"></s:select>
 						</td>
 						<td>下单人:</td>
-						<td><td><s:textfield name="query.orderCreater.name" type="text" size="10" /></td></td>
+						<td><td><s:textfield name="query.createrName" type="text" size="10" /></td></td>
 						<td>&nbsp;</td>
 						<td><a id="query"> 
 							<img src="${path}/images/can_b_01.gif" border="0" /> </a>
@@ -55,9 +57,9 @@
 							<s:select  list="#{'1':'送货','2':'自提'}" name="query.supplier.needs" cssStyle="width:115px"  headerKey="" headerValue="----请选择----" />
 						</td>
 						<td>审核人:</td>
-						<td><td><s:textfield name="query.orderChecker.name" type="text" size="10" /></td></td>
+						<td><td> <s:textfield name="query.checkterName" type="text" size="10" /> <td></td>
 						<td>跟单人:</td>
-						<td><input type="text" size="10" /></td>
+						<td><td><s:textfield name="query.compterName" type="text" size="10" /><td></td>
 					</tr>
 				</table>
 			</div>
@@ -75,51 +77,27 @@
 						<td width="13%">发货方式</td>
 						<td width="10%">跟单人</td>
 					</tr>
-						<tr align="center" bgcolor="#FFFFFF">
-							<td height="30">采购</td>
-							<td>2014-01-01</td>
-							<td>张三</td>
-							<td>2014-01-04</td>
-							<td>李四</td>
-							<td>七匹狼</td>
-							<td>自提</td>
-							<td>
-									<img src="${path}/images/icon_3.gif" />
-									<span style="line-height:12px; text-align:center;"> 
+
+                    <s:iterator value="#page.list" var="order">
+                        <tr align="center" bgcolor="#FFFFFF">
+                            <td height="30"><s:select list='#order.orderType==1?"采购单":"运输单"'/></td>
+                            <td><s:property value="#order.createTime"/></td>
+                            <td><s:property value="#order.orderCreater.name"/></td>
+                            <td><s:property value="#order.checkTime"/></td>
+                            <td><s:property value="#order.orderChecker.name"/></td>
+                            <td><s:property value="#order.supplier.name"/></td>
+                            <td><s:property value="#order.supplier.needs==1?'自取':'送货'"/></td>
+                            <td>
+                                <img src="${path}/images/icon_3.gif" />
+                                <span style="line-height:12px; text-align:center;">
 										<a href="assignTask.jsp" class="xiu">任务指派
-										</a> 
+										</a>
 									</span>
-							</td>
-						</tr>
-						<tr align="center" bgcolor="#FFFFFF">
-							<td height="30">采购</td>
-							<td>2014-01-01</td>
-							<td>张三</td>
-							<td>2014-01-04</td>
-							<td>李四</td>
-							<td>七匹狼</td>
-							<td>自提</td>
-							<td>
-									张送货
-							</td>
-						</tr>
-						<tr align="center" bgcolor="#FFFFFF">
-							<td height="30">采购</td>
-							<td>2014-01-01</td>
-							<td>张三</td>
-							<td>2014-01-04</td>
-							<td>李四</td>
-							<td>七匹狼</td>
-							<td>自提</td>
-							<td>
-									<img src="${path}/images/icon_3.gif" />
-									<span style="line-height:12px; text-align:center;"> 
-										<a href="${path}/transport/assignTask.jsp" class="xiu">任务指派
-										</a> 
-									</span>
-							</td>
-						</tr>
+                            </td>
+                        </tr>
+                    </s:iterator>
 				</table>
+                <%@ include file="../tools/paging.jsp" %>
 			</div>
 		</form>
 	</div>

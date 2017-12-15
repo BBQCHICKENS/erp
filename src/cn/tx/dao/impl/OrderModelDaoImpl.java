@@ -28,6 +28,12 @@ public class OrderModelDaoImpl extends BaseDaoImpl<OrderModel, OrderModelQuery> 
 		if(StringUtils.isNotBlank(q.getCreaterName())){
 			hql = hql + " and t.orderCreater.name like :createrName";
 		}
+        if(StringUtils.isNotBlank(q.getCompterName())){
+            hql = hql + " and t.orderCompleter.name like :compterName";
+        }
+        if(StringUtils.isNotBlank(q.getCheckterName())){
+            hql = hql + " and t.orderChecker.name like :checkterName";
+        }
 		if(q.getMinTotalNum() != null){
 			hql = hql + " and t.totalNum >= :minTotalNum";
 		}
@@ -58,6 +64,9 @@ public class OrderModelDaoImpl extends BaseDaoImpl<OrderModel, OrderModelQuery> 
 		if(q.getCheckTime() != null){
 			hql = hql + " and t.checkTime <= :maxCheckTime";
 		}
+        if(q.getSupplierId() != null){
+            hql = hql + " and t.supplier.supplierId = :supplierId";
+        }
 		return hql;
 	}
 	

@@ -25,9 +25,9 @@
         <property name="checkTime" type="java.util.Date">
             <column name="check_time" length="0" />
         </property>
-        <property name="completer" type="java.lang.Integer">
+       <!-- <property name="completer" type="java.lang.Integer">
             <column name="completer" />
-        </property>
+        </property>-->
         <property name="endTime" type="java.util.Date">
             <column name="end_time" length="0" />
         </property>
@@ -49,6 +49,7 @@
         
         <many-to-one name="orderCreater" column="creater"></many-to-one>
         <many-to-one name="orderChecker" column="checker"></many-to-one>
+        <many-to-one name="orderCompleter" column="completer"></many-to-one>
         <many-to-one name="supplier" column="supplier_id"></many-to-one>
         <set name="details" cascade="save-update">
         	<key column="order_id"></key>

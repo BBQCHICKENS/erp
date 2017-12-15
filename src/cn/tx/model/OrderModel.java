@@ -38,11 +38,19 @@ public class OrderModel implements java.io.Serializable {
 	/*
 	* 订单跟单人
 	* */
+    private  Emp orderCompleter;
 
 	private Supplier supplier;
 	
 	private Set<ConsoleLog> logs;
 
+	public Emp getOrderCompleter() {
+		return orderCompleter;
+	}
+
+	public void setOrderCompleter(Emp orderCompleter) {
+		this.orderCompleter = orderCompleter;
+	}
 
 	public Emp getOrderChecker() {
 		return orderChecker;

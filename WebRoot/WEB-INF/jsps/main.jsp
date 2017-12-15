@@ -88,7 +88,7 @@
 								<td><a class="hei" target="main" href="#">商品运输</a></td>
 							</tr>
 							<tr>
-								<td><a class="hei" target="main" href="${path}/assignTask_taskList">&nbsp;&nbsp;&nbsp;&nbsp;运输任务指派</a></td>
+								<td><a class="hei" target="main" href="${path}/assignTask_taskList?query.orderType=1&query.orderState=2">&nbsp;&nbsp;&nbsp;&nbsp;运输任务指派</a></td>
 							</tr>
 							<tr>
 								<td><a class="hei" target="main" href="${path}/assignTask_taskList">&nbsp;&nbsp;&nbsp;&nbsp;运输任务查询</a></td>
