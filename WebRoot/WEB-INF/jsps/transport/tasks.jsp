@@ -14,24 +14,42 @@
             $("#li2").css("background","#8ECC3D");
         }
 	});
-    function transportBuying() {
-        var orderId =$('#orderId').val();
+    function transportBuying(orderId) {
+        var diag = new Dialog();
+        diag.Width = 850;
+        diag.Height = 400;
+        diag.ShowButtonRow=true;
+        diag.Title = "未采购";
+        diag.URL = "${path}/assignTask_taskDetail?order.orderId="+orderId;
+        diag.OKEvent = function(){
+            var win = diag.innerFrame.contentWindow;
+            var result = win.transportBuying();
+            if(result == "success"){
+                diag.close();
+                window.location.href = "${path}/assignTask_tasks?query.orderType=2&query.orderState=1";
+            }
+        };
+        diag.show();
+        diag.okButton.value="马上采购";
+    }
+    function transportFinnish(orderId) {
         var diag = new Dialog();
         diag.Width = 850;
         diag.Height = 400;
         diag.ShowButtonRow=true;
         diag.Title = "采购中";
-        diag.URL = "${path}/assignTask_assignTask?order.orderId="+orderId;
+        diag.URL = "${path}/assignTask_taskDetail?order.orderId="+orderId;
         diag.OKEvent = function(){
             var win = diag.innerFrame.contentWindow;
-            var result = win.assignEmp()
+            var result = win.transportFinish()
             if(result == "success"){
                 diag.close();
-                window.location.href = "${path}/assignTask_taskList?query.orderType=1&query.orderState=2";
+                window.location.href = "${path}/assignTask_tasks?query.orderType=2&query.orderState=3";
             }
 
         };
         diag.show();
+        diag.okButton.value="采购完成";
     }
 </script>
 <style>
@@ -53,7 +71,7 @@
 		</div>
 	</div>
 	<div class="content-text">
-		<form action="tasks.jsp" method="post">
+		<form action="${path}/assignTask_tasks" method="post">
 			<input type="hidden" name="query.orderType" value="<s:property value="query.orderType"/>">
 			<input id="orderState" type="hidden" name="query.orderState" value="<s:property value="query.orderState"/>">
 			<div class="square-o-top">
@@ -84,11 +102,12 @@
 					<tr align="center"
 						style="background:url(${path}/images/table_bg.gif) repeat-x;">
 						<td width="8%" height="30">订单类别</td>
-						<td width="11%">供应商</td>
-						<td width="7%">发货方式</td>
+						<td width="10%">供应商</td>
+						<td width="14%">发货方式</td>
 						<td width="6%">联系人</td>
 						<td width="12%">联系方式</td>
-						<td width="40%">地址</td>
+						<td width="30%">地址</td>
+						<td width="20%">操作</td>
 					</tr>
 					<s:iterator value="#page.list" var="order">
 						<tr align="center" bgcolor="#FFFFFF">
@@ -100,10 +119,10 @@
 							<td align="left">&nbsp;<s:property value="#order.supplier.address"/></td>
 							<td>
 								<s:if test="#order.orderState == 1">
-									<a  onclick="transportBuying()" href="javascript:void(0)"><img src="${path}/images/icon_3.gif"/>详情</a>
+									<a  onclick="transportBuying(<s:property value="#order.orderId"/>)" href="javascript:void(0)"><img src="${path}/images/icon_3.gif"/>详情</a>
 								</s:if>
 								<s:else>
-									<a onclick="transportBuied()"  href="javascript:void(0)"><img src="${path}/images/icon_3.gif"/>详情</a>
+									<a onclick="transportFinnish(<s:property value="#order.orderId"/>)"  href="javascript:void(0)"><img src="${path}/images/icon_3.gif"/>详情</a>
 								</s:else>
 							</td>
 						</tr>

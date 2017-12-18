@@ -110,7 +110,7 @@
                             <td>
 							  <img src="${path}/images/icon_3.gif" />
 								<input value="<s:property value="#order.orderId"/>" type="hidden" id="orderId"/>
-							  <span style="line-height:12px; text-align:center;"> <a onclick="assignCompeter()" href="javascript:void(0)" class="xiu">任务指派</a></span>
+							    <span style="line-height:12px; text-align:center;"> <a onclick="assignCompeter()" href="javascript:void(0)" class="xiu">任务指派</a></span>
 							</td>
                         </tr>
                     </s:iterator>

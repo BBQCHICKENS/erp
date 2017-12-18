@@ -7,6 +7,42 @@
 			$("form:first").submit();
 		});
 	});
+	//添加
+	function transportBuying() {
+	    var orderId=$('#orderId').val();
+        var result = ""
+        $.ajax({
+            url:"${path}/ajax_assignTask_buying",
+            type:"post",
+            data:{
+                "order.orderId":orderId,
+            },
+            async:false,
+            dataType:"text",
+            success:function(responseText){
+                result = responseText;
+            }
+        });
+        return  result;
+    }
+    //完成采购准备入库
+    function transportFinish() {
+        var orderId=$('#orderId').val();
+        var result = ""
+        $.ajax({
+            url:"${path}/ajax_assignTask_transportFinish",
+            type:"post",
+            data:{
+                "order.orderId":orderId,
+            },
+            async:false,
+            dataType:"text",
+            success:function(responseText){
+                result = responseText;
+            }
+        });
+        return  result;
+    }
 </script>
 <div class="content-right">
 	<div class="content-r-pic_w">
@@ -15,29 +51,30 @@
 		</div>
 	</div>
 	<div class="content-text">
+		    <input id="orderId" type="hidden" value="<s:property value="order.orderId"/>">
 			<div class="square-o-top">
 				<table width="100%" border="0" cellpadding="0" cellspacing="0"
 					style="font-size:14px; font-weight:bold; font-family:"黑体";">
-					<tr>
-						<td height="30">企业名称:</td>
-						<td class="order_show_msg">七匹狼</td>
-						<td height="30">订单类别:</td>
-						<td class="order_show_msg">采购</td>
-						<td>提货方式:</td>
-						<td class="order_show_msg">自提</td>
-						<td>订 单 号:</td>
-						<td class="order_show_msg" colspan="2">asdfjy8af9dsu</td>
-					</tr>
-					<tr>
-						<td>联&nbsp;系&nbsp;人:</td>
-						<td class="order_show_msg">灰太狼</td>
-						<td>联系方式:</td>
-						<td class="order_show_msg">748748</td>
-						<td>商品总量:</td>
-						<td class="order_show_msg">300</td>
-						<td>地&nbsp;&nbsp;&nbsp;&nbsp;址:</td>
-						<td class="order_show_msg">狼堡</td>
-					</tr>
+				<tr>
+					<td height="30">企业名称:</td>
+					<td class="order_show_msg"><s:property value="order.supplier.name"/></td>
+					<td height="30">订单类别:</td>
+					<td class="order_show_msg"><e:orderTypetext orderType="${order.orderType}"/></td>
+					<td>提货方式:</td>
+					<td class="order_show_msg"><s:property value="order.supplier.needs==1?'自取':'送货'"/></td>
+					<td>订 单 号:</td>
+					<td class="order_show_msg" colspan="2"><s:property value="order.orderNum"/></td>
+				</tr>
+				<tr>
+					<td>联&nbsp;系&nbsp;人:</td>
+					<td class="order_show_msg"><s:property value="order.supplier.contact"/></td>
+					<td>联系方式:</td>
+					<td class="order_show_msg"><s:property value="order.supplier.tel"/></td>
+					<td>商品总量:</td>
+					<td class="order_show_msg"><s:property value="order.totalNum"/></td>
+					<td>地&nbsp;&nbsp;&nbsp;&nbsp;址:</td>
+					<td class="order_show_msg"><s:property value="order.supplier.address"/></td>
+				</tr>
 				</table>
 			</div>
 			<!--"square-o-top"end-->
@@ -51,34 +88,13 @@
 						<td width="50%">商品名称</td>
 						<td width="30%">数量</td>
 					</tr>
+					<s:iterator value="order.details" var="det">
 						<tr align="center" bgcolor="#FFFFFF">
-							<td height="30">上衣</td>
-							<td>狼皮背心</td>
-							<td>100</td>
+							<td height="30"><s:property value="#det.product.productType.name"/></td>
+							<td><s:property value="#det.product.name"/></td>
+							<td><s:property value="#det.detailNum"/></td>
 						</tr>
-						<tr align="center" bgcolor="#FFFFFF">
-							<td height="30">上衣</td>
-							<td>狼皮毛背心</td>
-							<td>100</td>
-						</tr>
-						<tr align="center" bgcolor="#FFFFFF">
-							<td height="30">上衣</td>
-							<td>狼皮棉背心</td>
-							<td>100</td>
-						</tr>
-				</table>
-				<br/>
-				<table width="100%">
-					<tr>
-						<td width="50%" align="center">
-							<a href="tasks.jsp" style="color:#0f0;font-size:20px;padding-top:2px;font-weight:bold;text-decoration:none;width:82px;height:28px;display:block;background:url(${path}/images/btn_bg.jpg)">
-								结&nbsp;&nbsp;单
-							</a>
-							<a href="tasks.jsp" style="color:#f00;font-size:20px;padding-top:2px;font-weight:bold;text-decoration:none;width:82px;height:28px;display:block;background:url(${path}/images/btn_bg.jpg)">
-								已结单
-							</a>
-						</td>
-					</tr>
+					</s:iterator>
 				</table>
 			</div>
 	</div>

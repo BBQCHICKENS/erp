@@ -30,7 +30,6 @@ public class OrderModelServiceImpl extends BaseServiceImpl<OrderModel, OrderMode
 
 	@Override
 	public void submitOrder(OrderModel order) {
-		
 		orderModelDao.save(order);
 	}
 
@@ -57,7 +56,7 @@ public class OrderModelServiceImpl extends BaseServiceImpl<OrderModel, OrderMode
 		emp.setEmpId(orderModel.getCompleter());
 		order.setOrderCompleter(emp);
 		order.setOrderType(Integer.valueOf(ERPConstants.ORDER_TYPE_TRANS));
-		order.setOrderState(Integer.valueOf(ERPConstants.ORDER_TYPE_TRANS_BUYING));
+		order.setOrderState(Integer.valueOf(ERPConstants.ORDER_TYPE_TRANS_BUY));
 		this.orderModelDao.update(order);
 	}
 }

@@ -81,8 +81,6 @@ public class AssignTaskAction extends BaseAction {
 		this.orderModelService = orderModelService;
 	}
 
-
-
 	//运输任务的指派页面
 	public  String assignTask_assignTask(){
 		//查询订单详情
@@ -93,7 +91,6 @@ public class AssignTaskAction extends BaseAction {
 		context.put("emp", empByDept);
 		return SUCCESS;
 	}
-
 	/**
 	 * 任务指派界面，查看审核通过的订单列表 statsu=2
 	 * @return
@@ -114,7 +111,6 @@ public class AssignTaskAction extends BaseAction {
 		context.put("suppliers", suppliers);
 		return SUCCESS;
 	}
-
 	//运输任务查询页面，运输人员查询的界面
 	public String assignTask_tasks(){
 		ActionContext context = ActionContext.getContext();
@@ -125,7 +121,6 @@ public class AssignTaskAction extends BaseAction {
 		Map<String, Object> session = context.getSession();
 		Emp emp = (Emp) session.get("user");
 		query.setCompleter(emp.getEmpId());
-
 		//只查询审核通过的单子;
 		exclude.add("supplier");
 		exclude.add("logs");
@@ -136,28 +131,26 @@ public class AssignTaskAction extends BaseAction {
 		context.put("suppliers", suppliers);
 		return SUCCESS;
 	}
-
-	public String orderModel_taskDetail(){
-		return SUCCESS;
+	public String assignTask_taskDetail(){
+		 order = this.orderModelService.getObj(this.order.getOrderId());
+		 return SUCCESS;
+	}
+	//订单修改成采购中
+	public void ajax_assignTask_buying() throws  Exception{
+		order = this.orderModelService.getObj(this.order.getOrderId());
+		order.setOrderState(Integer.valueOf(ERPConstants.ORDER_TYPE_TRANS_BUYING));
+		this.orderModelService.update(order);
+		this.response.getWriter().write("success");
 	}
 
-
-
-	public String orderModel_auditText(){
-		return SUCCESS;
-	}
-	
-	public String orderModel_input(){
-		ActionContext context = ActionContext.getContext();
-		//查询所有的供应商
-		List<Supplier> suppliers = supplierService.list();
-		context.put("suppliers", suppliers);
-		return SUCCESS;
-	}
-	
-	public String orderModel_orderDetail(){
-		order = orderModelService.getObj(query.getOrderId());
-		return SUCCESS;
+	//订单修改成完成采购,修改成入库单
+	public void ajax_assignTask_transportFinish() throws  Exception{
+		order = this.orderModelService.getObj(this.order.getOrderId());
+		order.setOrderState(Integer.valueOf(ERPConstants.ORDER_TYPE_INSTOCK_WAIT));
+		order.setOrderType(Integer.valueOf(ERPConstants.ORDER_TYPE_INSTOCK));
+		order.setEndTime(new Date());
+		this.orderModelService.update(order);
+		this.response.getWriter().write("success");
 	}
 	
 }
