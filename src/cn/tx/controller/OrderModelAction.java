@@ -160,12 +160,8 @@ public class OrderModelAction extends BaseAction {
 		if(pageNo == null ){
 			query.setPageNo(1);
 		}
-		
 		Page page = orderModelService.queryObjByCondition(query, exclude);
-		
 		context.put("page", page);
-		
-		
 		return SUCCESS;
 	}
 	public String orderModel_auditText(){
@@ -232,4 +228,9 @@ public class OrderModelAction extends BaseAction {
          this.orderModelService.updateExamineOrder(order1,emp,note);
 	     this.response.getWriter().write("success");
      }
+
+     public  void ajax_orderModel_assign() throws  Exception{
+		 this.orderModelService.updateOrderAssign(order);
+		 this.response.getWriter().write("success");
+	 }
 }

@@ -8,6 +8,25 @@
 			$("form:first").submit();
 		});
 	});
+	function assignCompeter() {
+        var orderId =$('#orderId').val();
+        var diag = new Dialog();
+        diag.Width = 850;
+        diag.Height = 400;
+        diag.ShowButtonRow=true;
+        diag.Title = "指派任务";
+        diag.URL = "${path}/assignTask_assignTask?order.orderId="+orderId;
+        diag.OKEvent = function(){
+            var win = diag.innerFrame.contentWindow;
+            var result = win.assignEmp()
+            if(result == "success"){
+                diag.close();
+                window.location.href = "${path}/assignTask_taskList?query.orderType=1&query.orderState=2";
+            }
+
+        };
+        diag.show();
+    }
 </script>
 <div class="content-right">
 	<div class="content-r-pic_w">
@@ -58,8 +77,8 @@
 						</td>
 						<td>审核人:</td>
 						<td><td> <s:textfield name="query.checkterName" type="text" size="10" /> <td></td>
-						<td>跟单人:</td>
-						<td><td><s:textfield name="query.compterName" type="text" size="10" /><td></td>
+					<%--	<td>跟单人:</td>
+						<td><td><s:textfield name="query.compterName" type="text" size="10" /><td></td>--%>
 					</tr>
 				</table>
 			</div>
@@ -80,7 +99,8 @@
 
                     <s:iterator value="#page.list" var="order">
                         <tr align="center" bgcolor="#FFFFFF">
-                            <td height="30"><s:select list='#order.orderType==1?"采购单":"运输单"'/></td>
+							<c:set var="orderType" value="${order.orderType}"/>
+                            <td height="30"><e:orderTypetext orderType="${orderType}"/></td>
                             <td><s:property value="#order.createTime"/></td>
                             <td><s:property value="#order.orderCreater.name"/></td>
                             <td><s:property value="#order.checkTime"/></td>
@@ -88,16 +108,14 @@
                             <td><s:property value="#order.supplier.name"/></td>
                             <td><s:property value="#order.supplier.needs==1?'自取':'送货'"/></td>
                             <td>
-                                <img src="${path}/images/icon_3.gif" />
-                                <span style="line-height:12px; text-align:center;">
-										<a href="assignTask.jsp" class="xiu">任务指派
-										</a>
-									</span>
-                            </td>
+							  <img src="${path}/images/icon_3.gif" />
+								<input value="<s:property value="#order.orderId"/>" type="hidden" id="orderId"/>
+							  <span style="line-height:12px; text-align:center;"> <a onclick="assignCompeter()" href="javascript:void(0)" class="xiu">任务指派</a></span>
+							</td>
                         </tr>
                     </s:iterator>
 				</table>
-                <%@ include file="../tools/paging.jsp" %>
+                <%@ include file="../tools/paging.jsp"%>
 			</div>
 		</form>
 	</div>

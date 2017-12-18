@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
-<link href="../../css/index.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../../js/jquery-1.8.3.js"></script>
+<%@ include file="../taglibs.jsp"%>
 <script type="text/javascript">
 	$(function() {
 		$("#task").click(function() {
@@ -48,7 +46,7 @@
 				<br/>
 				<table width="100%" border="1" cellpadding="0" cellspacing="0">
 					<tr align="center"
-						style="background:url(../../images/table_bg.gif) repeat-x;">
+						style="background:url(${path}/images/table_bg.gif) repeat-x;">
 						<td width="20%" height="30">商品类别</td>
 						<td width="50%">商品名称</td>
 						<td width="30%">数量</td>
@@ -73,10 +71,10 @@
 				<table width="100%">
 					<tr>
 						<td width="50%" align="center">
-							<a href="tasks.jsp" style="color:#0f0;font-size:20px;padding-top:2px;font-weight:bold;text-decoration:none;width:82px;height:28px;display:block;background:url(../../images/btn_bg.jpg)">
+							<a href="tasks.jsp" style="color:#0f0;font-size:20px;padding-top:2px;font-weight:bold;text-decoration:none;width:82px;height:28px;display:block;background:url(${path}/images/btn_bg.jpg)">
 								结&nbsp;&nbsp;单
 							</a>
-							<a href="tasks.jsp" style="color:#f00;font-size:20px;padding-top:2px;font-weight:bold;text-decoration:none;width:82px;height:28px;display:block;background:url(../../images/btn_bg.jpg)">
+							<a href="tasks.jsp" style="color:#f00;font-size:20px;padding-top:2px;font-weight:bold;text-decoration:none;width:82px;height:28px;display:block;background:url(${path}/images/btn_bg.jpg)">
 								已结单
 							</a>
 						</td>

@@ -37,5 +37,6 @@
     <property name="orderModelService" ref="orderModelService"/>
     <property name="supplierService" ref="supplierService"/>
     <property name="productService" ref="productService"/>
+    <property name="empService" ref="empService"/>
   </bean>
 </beans>

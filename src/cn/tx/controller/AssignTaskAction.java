@@ -2,6 +2,7 @@ package cn.tx.controller;
 
 import cn.tx.model.*;
 import cn.tx.query.OrderModelQuery;
+import cn.tx.service.EmpService;
 import cn.tx.service.OrderModelService;
 import cn.tx.service.ProductService;
 import cn.tx.service.SupplierService;
@@ -25,11 +26,17 @@ public class AssignTaskAction extends BaseAction {
 	
 
 	private ProductService productService;
-	
-	
-	
-	
-	
+
+	private EmpService empService;
+
+	public EmpService getEmpService() {
+		return empService;
+	}
+
+	public void setEmpService(EmpService empService) {
+		this.empService = empService;
+	}
+
 	public ProductService getProductService() {
 		return productService;
 	}
@@ -76,9 +83,14 @@ public class AssignTaskAction extends BaseAction {
 
 
 
-	//运输任务的纸牌页面
+	//运输任务的指派页面
 	public  String assignTask_assignTask(){
-
+		//查询订单详情
+		order =this.orderModelService.getObj(this.order.getOrderId());
+		//查询运输部部门的全部人员
+		List<Emp> empByDept = this.empService.getEmpByDept(2);
+		ActionContext context = ActionContext.getContext();
+		context.put("emp", empByDept);
 		return SUCCESS;
 	}
 
@@ -93,7 +105,6 @@ public class AssignTaskAction extends BaseAction {
 			query.setPageNo(1);
 		}
 		//只查询审核通过的单子;
-		exclude.add("orderCreater");
 		exclude.add("supplier");
 		exclude.add("logs");
 		Page page = orderModelService.queryObjByCondition(query, exclude);
@@ -104,17 +115,43 @@ public class AssignTaskAction extends BaseAction {
 		return SUCCESS;
 	}
 
+	//运输任务查询页面，运输人员查询的界面
+	public String assignTask_tasks(){
+		ActionContext context = ActionContext.getContext();
+		Integer pageNo = query.getPageNo();
+		if(pageNo == null ){
+			query.setPageNo(1);
+		}
+		Map<String, Object> session = context.getSession();
+		Emp emp = (Emp) session.get("user");
+		query.setCompleter(emp.getEmpId());
+
+		//只查询审核通过的单子;
+		exclude.add("supplier");
+		exclude.add("logs");
+		Page page = orderModelService.queryObjByCondition(query, exclude);
+		context.put("page", page);
+		//查询所有的供应商
+		List<Supplier> suppliers = supplierService.list();
+		context.put("suppliers", suppliers);
+		return SUCCESS;
+	}
+
+	public String orderModel_taskDetail(){
+		return SUCCESS;
+	}
+
+
+
 	public String orderModel_auditText(){
 		return SUCCESS;
 	}
 	
 	public String orderModel_input(){
 		ActionContext context = ActionContext.getContext();
-		
 		//查询所有的供应商
 		List<Supplier> suppliers = supplierService.list();
 		context.put("suppliers", suppliers);
-		
 		return SUCCESS;
 	}
 	
@@ -122,6 +159,5 @@ public class AssignTaskAction extends BaseAction {
 		order = orderModelService.getObj(query.getOrderId());
 		return SUCCESS;
 	}
-	
 	
 }

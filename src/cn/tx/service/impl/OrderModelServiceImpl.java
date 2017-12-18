@@ -7,6 +7,7 @@ import cn.tx.model.Emp;
 import cn.tx.model.OrderModel;
 import cn.tx.query.OrderModelQuery;
 import cn.tx.service.OrderModelService;
+import cn.tx.utils.ERPConstants;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -49,5 +50,14 @@ public class OrderModelServiceImpl extends BaseServiceImpl<OrderModel, OrderMode
 		this.consoleLogDao.save(consoleLog);
 	}
 
-
+	@Override
+	public void updateOrderAssign(OrderModel orderModel) {
+		OrderModel order = this.orderModelDao.getObj(orderModel.getOrderId());
+		Emp emp =new Emp();
+		emp.setEmpId(orderModel.getCompleter());
+		order.setOrderCompleter(emp);
+		order.setOrderType(Integer.valueOf(ERPConstants.ORDER_TYPE_TRANS));
+		order.setOrderState(Integer.valueOf(ERPConstants.ORDER_TYPE_TRANS_BUYING));
+		this.orderModelDao.update(order);
+	}
 }

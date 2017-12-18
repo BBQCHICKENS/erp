@@ -181,8 +181,6 @@ public abstract class BaseDaoImpl<T, Q> extends HibernateDaoSupport implements B
 		}
 		
 	}
-
-	
 	public List<T> list(){
 		Class<?> class1 = getGenericClass();
 		String hql = "from "+class1.getName();

@@ -1,15 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
-<link href="../../css/index.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../../js/jquery-1.8.3.js"></script>
+<%@ include file="../taglibs.jsp"%>
 <script type="text/javascript">
 	$(function() {
 		$("#query").click(function() {
 			$("[name='pageNum']").val(1);
 			$("form:first").submit();
 		});
+        var orderState = $("#orderState").val();
+        if(orderState == "1"){
+            $("#li1").css("background","#8ECC3D");
+        }
+        if(orderState == "3"){
+            $("#li2").css("background","#8ECC3D");
+        }
 	});
+    function transportBuying() {
+        var orderId =$('#orderId').val();
+        var diag = new Dialog();
+        diag.Width = 850;
+        diag.Height = 400;
+        diag.ShowButtonRow=true;
+        diag.Title = "采购中";
+        diag.URL = "${path}/assignTask_assignTask?order.orderId="+orderId;
+        diag.OKEvent = function(){
+            var win = diag.innerFrame.contentWindow;
+            var result = win.assignEmp()
+            if(result == "success"){
+                diag.close();
+                window.location.href = "${path}/assignTask_taskList?query.orderType=1&query.orderState=2";
+            }
+
+        };
+        diag.show();
+    }
 </script>
+<style>
+	li{
+		list-style-type: none;
+		float: left;
+		padding: 3px;
+		border: 1px solid #8ECC3D;
+		width: 80px;
+		text-align: center;
+		margin-left: 1px;
+		font-size: 15px;
+	}
+</style>
 <div class="content-right">
 	<div class="content-r-pic_w">
 		<div style="margin:8px auto auto 12px;margin-top:6px">
@@ -17,61 +53,61 @@
 		</div>
 	</div>
 	<div class="content-text">
-		<form action="tasks.jsp" method="post"> 
+		<form action="tasks.jsp" method="post">
+			<input type="hidden" name="query.orderType" value="<s:property value="query.orderType"/>">
+			<input id="orderState" type="hidden" name="query.orderState" value="<s:property value="query.orderState"/>">
 			<div class="square-o-top">
 				<table width="100%" border="0" cellpadding="0" cellspacing="0"
 					style="font-size:14px; font-weight:bold; font-family:"黑体";">
 					<tr>
 						<td width="8%">供&nbsp;应&nbsp;商:</td>
 						<td width="29%">
-							<select style="width:137px">
-								<option value="-1">----请-选-择----</option>
-								<option value="1">七匹狼</option>
-								<option value="0">康师傅</option>
-							</select>
+							<s:select list="#suppliers" name="query.supplierId" cssStyle="width:137px" headerKey="" headerValue="----请-选-择----" listKey="supplierId" listValue="name"></s:select>
 						</td>
 						<td width="8%">发货方式:</td>
 						<td width="45%">
-							<select style="width:137px">
-								<option value="-1">----请-选-择----</option>
-								<option value="1">送货</option>
-								<option value="0">自提</option>
-							</select>
+							<s:select  list="#{'1':'自提','2':'送货'}" name="query.needs" cssStyle="width:137px"  headerKey="" headerValue="----请选择----" />
 						</td>
 						<td width=""><a id="query"> 
-							<img src="../../images/can_b_01.gif" border="0" /> </a>
+							<img src="${path}/images/can_b_01.gif" border="0" /> </a>
 						</td>
 					</tr>
 				</table>
 			</div>
 			<!--"square-o-top"end-->
 			<div class="square-order">
+				<ul>
+					<li id="li1"><a href="${path}/assignTask_tasks?query.orderType=2&query.orderState=1" style="text-decoration: none;color: black">待采购</a></li>
+					<li id="li2"><a href="${path}/assignTask_tasks?query.orderType=2&query.orderState=3" style="text-decoration: none;color: black">采购中</a></li>
+				</ul>
 				<table width="100%" border="1" cellpadding="0" cellspacing="0">
 					<tr align="center"
-						style="background:url(../../images/table_bg.gif) repeat-x;">
+						style="background:url(${path}/images/table_bg.gif) repeat-x;">
 						<td width="8%" height="30">订单类别</td>
 						<td width="11%">供应商</td>
 						<td width="7%">发货方式</td>
 						<td width="6%">联系人</td>
 						<td width="12%">联系方式</td>
 						<td width="40%">地址</td>
-						<td width="8%">地址</td>
-						<td width="6%">详情</td>
 					</tr>
+					<s:iterator value="#page.list" var="order">
 						<tr align="center" bgcolor="#FFFFFF">
-							<td height="30">采购</td>
-							<td>七匹狼</td>
-							<td>送货</td>
-							<td>狼外婆</td>
-							<td>119</td>
-							<td align="left">&nbsp;狼堡</td>
-							<td>正在采购</td>
+							<td height="30"><e:orderTypetext orderType="${orderType}"/></td>
+							<td><s:property value="#order.supplier.name"/></td>
+							<td><s:property value="#order.supplier.needs==1?'自取':'送货'"/></td>
+							<td><s:property value="#order.supplier.contact"/></td>
+							<td><s:property value="#order.supplier.tel"/></td>
+							<td align="left">&nbsp;<s:property value="#order.supplier.address"/></td>
 							<td>
-								<a href="./taskDetail.jsp">
-									<img src="../../images/icon_3.gif" />详情
-								</a>
+								<s:if test="#order.orderState == 1">
+									<a  onclick="transportBuying()" href="javascript:void(0)"><img src="${path}/images/icon_3.gif"/>详情</a>
+								</s:if>
+								<s:else>
+									<a onclick="transportBuied()"  href="javascript:void(0)"><img src="${path}/images/icon_3.gif"/>详情</a>
+								</s:else>
 							</td>
 						</tr>
+					</s:iterator>
 				</table>
 			</div>
 		</form>

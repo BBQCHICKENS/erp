@@ -24,8 +24,6 @@ public class OrderModel implements java.io.Serializable {
 	private Integer totalNum;
 	private Double totalPrice;
 	private Integer supplierId;
-	
-	
 	/**
 	 * 订单创建人
 	 */
@@ -34,7 +32,6 @@ public class OrderModel implements java.io.Serializable {
 	 * 订单的审核人
 	 */
 	private Emp orderChecker;
-	
 	/*
 	* 订单跟单人
 	* */
@@ -73,11 +70,6 @@ public class OrderModel implements java.io.Serializable {
 	 * @return
 	 */
 	private Set<OrderDetail> details;
-	
-	
-	
-	
-
 	// Constructors
 
 	public Set<OrderDetail> getDetails() {

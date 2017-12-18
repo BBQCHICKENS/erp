@@ -90,7 +90,11 @@ public class EmpServiceImpl extends BaseServiceImpl<Emp, EmpQuery> implements Em
 	public Emp getEmpByUnameAndPWord(String username, String password) {
 		return empDao.getEmpByUnameAndPWord(username, password);
 	}
-	
-	
+
+	@Override
+	public List<Emp> getEmpByDept(Integer DeptId) {
+		return empDao.getEmpByDept(DeptId);
+	}
+
 
 }

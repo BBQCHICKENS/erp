@@ -2,6 +2,7 @@ package cn.tx.dao.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
@@ -94,11 +95,12 @@ public class EmpDaoImpl extends BaseDaoImpl<Emp, EmpQuery> implements EmpDao {
 		return emp;
 	}
 
-	
+	@Override
+	public List<Emp> getEmpByDept(Integer DeptId) {
+		String hql ="from Emp e where e.dep.depId=?";
+		List emps = this.getHibernateTemplate().find(hql, DeptId);
+		return emps;
+	}
 
-	
-
-	
-	
 
 }

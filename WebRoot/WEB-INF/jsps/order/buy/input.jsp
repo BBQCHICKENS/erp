@@ -44,11 +44,6 @@
 				$(this).find("[value='"+productId+"']").remove();
 			}else{
 				load_Product_detail(proThis.parent().parent(), productId);
-				
-				
-				
-				
-				
 			}
 			
 		})

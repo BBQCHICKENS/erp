@@ -19,4 +19,6 @@ public interface EmpService extends BaseService<Emp, EmpQuery> {
 	
 	public Emp getEmpByUnameAndPWord(String username, String password);
 
+	public List<Emp> getEmpByDept(Integer DeptId);
+
 }

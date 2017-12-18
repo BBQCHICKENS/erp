@@ -70,8 +70,9 @@ public class OrderModelDaoImpl extends BaseDaoImpl<OrderModel, OrderModelQuery> 
         if(q.getNeeds()!= null){
             hql = hql + " and t.supplier.needs = :needs";
         }
+		if(q.getCompleter()!= null){
+			hql = hql + " and t.orderCompleter.empId = :completer";
+		}
 		return hql;
 	}
-	
-
 }

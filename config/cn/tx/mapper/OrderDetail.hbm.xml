@@ -19,12 +19,13 @@
         <!-- <property name="productId" type="java.lang.Integer">
             <column name="product_id" />
         </property> -->
-        <property name="orderId" type="java.lang.String">
-            <column name="order_id" length="20" />
-        </property>
+        <!--<property name="orderId" type="java.lang.String">-->
+            <!--<column name="order_id" length="20" />-->
+        <!--</property>-->
         <property name="surplus" type="java.lang.Integer">
             <column name="surplus" />
         </property>
         <many-to-one name="product" column="product_id"></many-to-one>
+        <many-to-one name="orderModel" column="order_id"></many-to-one>
     </class>
 </hibernate-mapping>

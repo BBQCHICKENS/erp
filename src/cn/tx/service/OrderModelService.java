@@ -10,4 +10,7 @@ public interface OrderModelService extends BaseService<OrderModel, OrderModelQue
 	//产品审核
 	public void updateExamineOrder(OrderModel orderModel, Emp emp,String note);
 
+	//分配运输任务
+	public  void updateOrderAssign(OrderModel orderModel);
+
 }

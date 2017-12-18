@@ -91,12 +91,9 @@ li{
 		<input type="hidden" name="query.orderType" value="<s:property value="query.orderType"/>">
 		<input id="orderState" type="hidden" name="query.orderState" value="<s:property value="query.orderState"/>">
 			<div class="square-o-top">
-				
-				
 				<table width="100%" border="0" cellpadding="0" cellspacing="0"
 					style="font-size:14px; font-weight:bold; font-family:"黑体";">
 					<tr>
-						
 						<td>下单人:</td>
 						<td><s:textfield name="query.createrName" type="text" size="14" /></td>
 						<td>总量:</td>
@@ -104,8 +101,7 @@ li{
 						<td>到 </td>
 						<td>&nbsp;&nbsp;<s:textfield name="query.maxTotalNum" type="text" size="14" /></td>
 						<td height="30"></td>
-						<td> 
-							
+						<td>
 						</td>
 						<td ><a id="query"> 
 							<img src="${path}/images/can_b_01.gif" border="0" /> </a>

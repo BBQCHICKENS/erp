@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="head">
 			<div class="head-left">
-				<span style="font-weight:bold; color:#1f4906">欢迎您-</span><br />
+				<span style="font-weight:bold; color:#1f4906; font-size: 11px;">欢迎您-</span><br />
 				<span style="color:#4a940d">
 					<s:property value="#session.user.name"/>
 				</span>
@@ -91,7 +91,7 @@
 								<td><a class="hei" target="main" href="${path}/assignTask_taskList?query.orderType=1&query.orderState=2">&nbsp;&nbsp;&nbsp;&nbsp;运输任务指派</a></td>
 							</tr>
 							<tr>
-								<td><a class="hei" target="main" href="${path}/assignTask_taskList">&nbsp;&nbsp;&nbsp;&nbsp;运输任务查询</a></td>
+								<td><a class="hei" target="main" href="${path}/assignTask_tasks?query.orderType=2&query.orderState=1">&nbsp;&nbsp;&nbsp;&nbsp;运输任务查询</a></td>
 							</tr>
 							<tr>
 								<td><a class="hei" target="main" href="#">仓库管理</a></td>

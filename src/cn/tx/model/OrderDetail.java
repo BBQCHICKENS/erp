@@ -19,10 +19,16 @@ public class OrderDetail  implements java.io.Serializable {
      private Integer surplus;
      
      private Product product;
-     
-     
 
+     private OrderModel orderModel;
 
+    public OrderModel getOrderModel() {
+        return orderModel;
+    }
+
+    public void setOrderModel(OrderModel orderModel) {
+        this.orderModel = orderModel;
+    }
     // Constructors
 
     public Product getProduct() {
