@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.tx.model.StoreLog" table="store_log" schema="tx_erp">
+        <id name="logId" column="log_id">
+            <generator class="native"/>
+        </id>
+        <property name="empId" column="emp_id"/>
+        <property name="orderDetailId" column="order_detail_id"/>
+        <property name="storeId" column="store_id"/>
+        <property name="operTime" column="oper_time"/>
+        <property name="num" column="num"/>
+        <property name="type" column="type"/>
+    </class>
+</hibernate-mapping>
