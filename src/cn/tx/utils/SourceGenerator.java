@@ -18,7 +18,7 @@ public class SourceGenerator {
 	public static void main(String[] args) throws Exception {
 		
 		
-		generator("ConsoleLog");
+		generator("StoreDetail");
 	}
 	
 	public static void generator(String className) throws Exception{

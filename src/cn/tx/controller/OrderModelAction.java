@@ -201,6 +201,7 @@ public class OrderModelAction extends BaseAction {
 		for(int i = 0; i< productTypeId.length; i++){
 			OrderDetail od = new OrderDetail();
 			od.setDetailNum(detailNum[i]);
+			od.setSurplus(detailNum[i]);
 			od.setDetailPrice(detailPrice[i]);
 			Product product = productService.getObj(productId[i]);
 			od.setProduct(product);

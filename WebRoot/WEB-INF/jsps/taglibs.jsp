@@ -18,6 +18,8 @@ var path = "${path}";
 <script type="text/javascript" src="${path }/js/zdialog/zDrag.js"></script>
 <script type="text/javascript" src="${path }/js/zdialog/zDialog.js"></script>
 <script type="text/javascript" src="${path }/js/jquery.form.js"></script>
+<script type="text/javascript" src="${path }/zTree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="${path }/zTree/js/jquery.ztree.excheck.js"></script>
 
 </head>
 <body>

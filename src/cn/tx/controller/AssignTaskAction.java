@@ -135,6 +135,29 @@ public class AssignTaskAction extends BaseAction {
 		 order = this.orderModelService.getObj(this.order.getOrderId());
 		 return SUCCESS;
 	}
+
+	//入库界面
+	public  String  assignTask_inList(){
+		ActionContext context = ActionContext.getContext();
+		Integer pageNo = query.getPageNo();
+		if(pageNo == null ){
+			query.setPageNo(1);
+		}
+		//只查询审核通过的单子;
+		exclude.add("supplier");
+		exclude.add("logs");
+		Page page = orderModelService.queryObjByCondition(query, exclude);
+		context.put("page", page);
+		return  "success_inList";
+	}
+
+	//入库界面
+	public  String  assignTask_inDetail(){
+		 order =this.orderModelService.getObj(this.order.getOrderId());
+		 return  "success_inDetail";
+	}
+
+
 	//订单修改成采购中
 	public void ajax_assignTask_buying() throws  Exception{
 		order = this.orderModelService.getObj(this.order.getOrderId());

@@ -67,27 +67,42 @@ public abstract class BaseDaoImpl<T, Q> extends HibernateDaoSupport implements B
 					//获得私有属性的值
 					object = startNumField.get(q);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				List<T> list = (List<T>)query.setFirstResult((Integer)object).setMaxResults(5).list();
-				
 				return list;
 			}
 			
 		});
-		
 		return tList;
 	}
-	
+	@Override
+	public List<T> queryObjByConditionNoPage(final Q q, final List<String> exclude) {
+		@SuppressWarnings("unchecked")
+		List<T> tList = this.getHibernateTemplate().executeFind(new HibernateCallback<List<T>>() {
+			/**
+			 * Session是spring开启的代理session，可以自动的开事务，提交事务和关闭session
+			 */
+			@Override
+			public List<T> doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				String hql = createHql(q);
+				//创建查询对象
+				Query query = session.createQuery(hql);
+				setDynamicParam(query, q, exclude);
+				List<T> list = (List<T>)query.list();
+				return list;
+			}
+		});
+		return tList;
+	}
+
 	public Long queryObjByConditionCount(final Q q, final List<String> exclude){
-		
 		Long totalCount = this.getHibernateTemplate().execute(new HibernateCallback<Long>() {
 
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException,
 					SQLException {
-				
 				String hql = createHqlCount(q);
 				//创建查询对象
 				Query query = session.createQuery(hql);
@@ -96,12 +111,9 @@ public abstract class BaseDaoImpl<T, Q> extends HibernateDaoSupport implements B
 				return count;
 			}
 		});
-		
 		return totalCount;
-		
-		
 	}
-	
+
 	public Class<?> getGenericClass(){
 		//获得泛型的父类
 		Type genericSuperclass = this.getClass().getGenericSuperclass();
@@ -125,11 +137,9 @@ public abstract class BaseDaoImpl<T, Q> extends HibernateDaoSupport implements B
 	 * @return
 	 */
 	public abstract String createHql(Q q);
-	
-	
+
 	public abstract String createHqlCount(Q q);
-	
-	
+
 	public abstract String createHqlCondition(Q q);
 	
 	
@@ -141,7 +151,6 @@ public abstract class BaseDaoImpl<T, Q> extends HibernateDaoSupport implements B
 	 */
 	public void setDynamicParam(Query query, Q q, List<String> exclude){
 		Class<? extends Object> class1 = q.getClass();
-		
 		//反向解析查询对象，列出查询对象的所有属性
 		Field[] fields = class1.getDeclaredFields();
 		Field[] superFields = class1.getSuperclass().getDeclaredFields();
@@ -172,7 +181,6 @@ public abstract class BaseDaoImpl<T, Q> extends HibernateDaoSupport implements B
 					if(StringUtils.isNotBlank(val.toString())){
 						query.setParameter(fieldName, "%"+val+"%");
 					}
-					
 				}else{
 					query.setParameter(fieldName, val);
 				}
@@ -185,6 +193,5 @@ public abstract class BaseDaoImpl<T, Q> extends HibernateDaoSupport implements B
 		Class<?> class1 = getGenericClass();
 		String hql = "from "+class1.getName();
 		return this.getHibernateTemplate().find(hql);
-		
 	}
 }

@@ -24,7 +24,13 @@ public interface BaseDao<T, Q> {
 	 * @return
 	 */
 	public List<T> queryObjByCondition(final Q q, final List<String> exclude );
-	
+
+	/**
+	 * 条件查询的数据,不分页
+	 */
+	public List<T> queryObjByConditionNoPage(final Q q, final List<String> exclude );
+
+
 	/**
 	 * 查询指定条件下的总记录数
 	 * @param q
@@ -35,4 +41,6 @@ public interface BaseDao<T, Q> {
 	public List<T> list();
 
 	public Long queryObjByConditionCount(final Q q, final List<String> exclude);
+
+
 }

@@ -25,7 +25,13 @@
   <bean id="orderDetailDao" class="cn.tx.dao.impl.OrderDetailDaoImpl"> 
     <property name="sessionFactory" ref="sessionFactory"/> 
   </bean>  
-  <bean id="consoleLogDao" class="cn.tx.dao.impl.ConsoleLogDaoImpl">
+  <bean id="consoleLogDao" class="cn.tx.dao.impl.ConsoleLogDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="storeDao" class="cn.tx.dao.impl.StoreDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="storeDetailDao" class="cn.tx.dao.impl.StoreDetailDaoImpl">
     <property name="sessionFactory" ref="sessionFactory"/>
   </bean>
 </beans>

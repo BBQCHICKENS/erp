@@ -17,6 +17,9 @@
 		<mapping resource="cn/tx/mapper/OrderModel.hbm.xml" />
 		<mapping resource="cn/tx/mapper/OrderDetail.hbm.xml" />
 		<mapping resource="cn/tx/mapper/ConsoleLog.hbm.xml" />
+		<mapping resource="cn/tx/mapper/Store.hbm.xml" />
+		<mapping resource="cn/tx/mapper/StoreDetail.hbm.xml" />
+		<mapping resource="cn/tx/mapper/StoreLog.hbm.xml" />
 
 	</session-factory>
 

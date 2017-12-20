@@ -83,6 +83,8 @@
         <!--运输管理的配置-->
 		<action name="assignTask_*" class="assignTaskAction" method="assignTask_{1}">
 			<result name="success">/WEB-INF/jsps/transport/{1}.jsp</result>
+			<result name="success_inList">/WEB-INF/jsps/store/{1}.jsp</result>
+			<result name="success_inDetail">/WEB-INF/jsps/store/{1}.jsp</result>
 		</action>
 		<action name="ajax_assignTask_*" class="assignTaskAction" method="ajax_assignTask_{1}"/>
 
@@ -91,7 +93,12 @@
 			<result name="success">/WEB-INF/jsps/order/buy/{1}.jsp</result>
 		</action>
 		<action name="ajax_consoleLog_*" class="consoleLogAction" method="ajax_consoleLog_{1}"/>
-			
+
+		<!--仓库的的配置-->
+		<action name="store_*" class="storeAction" method="store_{1}">
+			<result name="success">/WEB-INF/jsps/store/{1}.jsp</result>
+		</action>
+		<action name="ajax_store_*" class="storeAction" method="ajax_store_{1}"/>
 	</package>
 	
 </struts>

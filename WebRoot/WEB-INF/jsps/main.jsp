@@ -97,10 +97,10 @@
 								<td><a class="hei" target="main" href="#">仓库管理</a></td>
 							</tr>
 							<tr>
-								<td><a class="hei" target="main" href="store/detail/list.jsp">&nbsp;&nbsp;&nbsp;&nbsp;库存查询</a></td>
+								<td><a class="hei" target="main" href="${path}/store_storeList">&nbsp;&nbsp;&nbsp;&nbsp;库存查询</a></td>
 							</tr>
 							<tr>
-								<td><a class="hei" target="main" href="store/in/inList.jsp">&nbsp;&nbsp;&nbsp;&nbsp;入库</a></td>
+								<td><a class="hei" target="main" href="${path}/assignTask_inList?query.orderType=3&query.orderState=1">&nbsp;&nbsp;&nbsp;&nbsp;入库</a></td>
 							</tr>
 							<tr>
 								<td><a class="hei" target="main">&nbsp;&nbsp;&nbsp;&nbsp;出库</a></td>
