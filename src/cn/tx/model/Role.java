@@ -1,5 +1,7 @@
 package cn.tx.model;
 
+import java.util.Set;
+
 /**
  * Role entity. @author MyEclipse Persistence Tools
  */
@@ -13,8 +15,17 @@ public class Role implements java.io.Serializable {
 	private String code;
 	
 	private String select;
-	
-	
+
+
+	private Set<Menu> menus;
+
+	public Set<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(Set<Menu> menus) {
+		this.menus = menus;
+	}
 
 	// Constructors
 

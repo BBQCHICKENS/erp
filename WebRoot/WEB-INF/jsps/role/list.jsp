@@ -9,7 +9,7 @@
         $("#addRole").click(function() {
             var diag = new Dialog();
             diag.Width = 850;
-            diag.Height = 400;
+            diag.Height = 125;
             diag.ShowButtonRow=true;
             diag.Title = "添加角色";
             diag.URL = "${path}/role_input";
@@ -20,20 +20,55 @@
                 //如果成功页面要刷新
                 if(result == "success"){
                     diag.close();
-                    window.location.href = "${path }/emp_list";
+                    window.location.href = "${path }/role_list";
                 }
             };
             diag.show();
         });
-
 	});
-	function showMsg(msg,uuid){
-		//top.document.getElementById("context-msg").style.display = "block";
-		top.$('context-msg').style.display = "block";
-		top.$('context-msg-text').innerHTML=msg;
-		top.$('hid-action').value="actionName";
-		top.lock.show();
-	}
+    function  updateRole(roleId) {
+        var diag = new Dialog();
+        diag.Width = 850;
+        diag.Height = 150;
+        diag.ShowButtonRow=true;
+        diag.Title = "修改部门信息";
+        diag.URL = "${path}/role_update?role.roleId="+roleId;
+        diag.OKEvent = function(){
+            var win = diag.innerFrame.contentWindow;
+            //调用提交表单的方法获得返回值
+            var result = win.submitForm();
+            //如果成功页面要刷新
+            if(result == "success"){
+                diag.close();
+                window.location.href = "${path }/role_list";
+            }
+        };
+        diag.show();
+    }
+    function deleteRole(roleId){
+        Dialog.confirm('确认要删除角色吗,与角色相关的信息也会删除?',function(){
+            window.location.href = "${path}/role_delete?role.roleId="+roleId;
+        });
+    }
+    function assignRole(roleId) {
+        var diag = new Dialog();
+        diag.Width = 300;
+        diag.Height = 500;
+        diag.ShowButtonRow=true;
+        diag.Title = "分配权限";
+        diag.URL = "${path}/role_assignAuthority?role.roleId="+roleId;
+        diag.OKEvent = function(){
+            var win = diag.innerFrame.contentWindow;
+            //调用提交表单的方法获得返回值
+            var result = win.getNodes(roleId);
+            //如果成功页面要刷新
+            if(result == "success"){
+                diag.close();
+                window.location.href = "${path }/role_list";
+            }
+        };
+        diag.show();
+    }
 </script>
 <div class="content-right">
 	<div class="content-r-pic_w">
@@ -76,13 +111,17 @@
 						<td height="30"><s:property value="#role.name"/></td>
 						<td><s:property value="#role.code"/></td>
 						<td>
+							<img src="${path}/images/icon_3.gif" />
+							<span style="line-height:12px; text-align:center;">
+								<a href="javascript:void(0)" onclick="assignRole(<s:property value="#role.roleId"/>)" class="xiu">分配权限</a>
+							</span>
 							<img src="${path}/images/icon_3.gif" /> 
 							<span style="line-height:12px; text-align:center;"> 
-								<a href="./input.jsp" class="xiu">修改</a>
+								<a href="javascript:void(0)" onclick="updateRole(<s:property value="#role.roleId"/>)" class="xiu">修改</a>
 							</span> 
 							<img src="${path}/images/icon_04.gif" /> 
 							<span style="line-height:12px; text-align:center;"> 
-								<a href="javascript:void(0)" class="xiu" onclick="showMsg('是否删除该项数据？',318)">删除</a>
+								<a href="javascript:void(0)" class="xiu" onclick="deleteRole(<s:property value="#role.roleId"/>)">删除</a>
 							</span>
 						</td>
 					</tr>

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+import cn.tx.model.Menu;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
@@ -18,7 +19,7 @@ public class SourceGenerator {
 	public static void main(String[] args) throws Exception {
 		
 		
-		generator("StoreDetail");
+		generator("Menu");
 	}
 	
 	public static void generator(String className) throws Exception{

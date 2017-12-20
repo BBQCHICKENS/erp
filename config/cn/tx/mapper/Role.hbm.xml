@@ -16,5 +16,10 @@
         <property name="code" type="java.lang.String">
             <column name="code" length="30" />
         </property>
+
+        <set name="menus" table="relation_role_menu">
+            <key column="role_id"></key>
+            <many-to-many column="menu_id" class="cn.tx.model.Menu"></many-to-many>
+        </set>
     </class>
 </hibernate-mapping>

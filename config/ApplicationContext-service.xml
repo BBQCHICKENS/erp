@@ -9,7 +9,8 @@
     <property name="depDao" ref="depDao"/> 
   </bean>  
   <bean id="roleService" class="cn.tx.service.impl.RoleServiceImpl"> 
-    <property name="roleDao" ref="roleDao"/> 
+    <property name="roleDao" ref="roleDao"/>
+    <property name="menuDao" ref="menuDao"/>
   </bean>  
   <bean id="supplierService" class="cn.tx.service.impl.SupplierServiceImpl"> 
     <property name="supplierDao" ref="supplierDao"/> 
@@ -31,12 +32,15 @@
     <property name="consoleLogDao" ref="consoleLogDao"/> 
   </bean>  
   <bean id="storeService" class="cn.tx.service.impl.StoreServiceImpl"> 
-    <property name="storeDao" ref="storeDao"/>
-    <property name="orderDetailDao" ref="orderDetailDao"/>
-    <property name="orderModelDao" ref="orderModelDao"/>
-    <property name="productDao" ref="productDao"/>
+    <property name="storeDao" ref="storeDao"/>  
+    <property name="orderDetailDao" ref="orderDetailDao"/>  
+    <property name="orderModelDao" ref="orderModelDao"/>  
+    <property name="productDao" ref="productDao"/> 
   </bean>  
-  <bean id="storeDetailService" class="cn.tx.service.impl.StoreDetailServiceImpl">
-    <property name="storeDetailDao" ref="storeDetailDao"/>
+  <bean id="storeDetailService" class="cn.tx.service.impl.StoreDetailServiceImpl"> 
+    <property name="storeDetailDao" ref="storeDetailDao"/> 
+  </bean>  
+  <bean id="menuService" class="cn.tx.service.impl.MenuServiceImpl">
+    <property name="menuDao" ref="menuDao"/>
   </bean>
 </beans>

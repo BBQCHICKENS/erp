@@ -31,7 +31,10 @@
   <bean id="storeDao" class="cn.tx.dao.impl.StoreDaoImpl"> 
     <property name="sessionFactory" ref="sessionFactory"/> 
   </bean>  
-  <bean id="storeDetailDao" class="cn.tx.dao.impl.StoreDetailDaoImpl">
+  <bean id="storeDetailDao" class="cn.tx.dao.impl.StoreDetailDaoImpl"> 
+    <property name="sessionFactory" ref="sessionFactory"/> 
+  </bean>  
+  <bean id="menuDao" class="cn.tx.dao.impl.MenuDaoImpl">
     <property name="sessionFactory" ref="sessionFactory"/>
   </bean>
 </beans>

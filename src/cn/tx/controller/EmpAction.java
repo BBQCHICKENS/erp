@@ -5,12 +5,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import javax.imageio.ImageIO;
 
+import cn.tx.model.Menu;
+import net.sf.json.JSONArray;
 import org.apache.commons.lang.StringUtils;
 
 import cn.tx.model.Dep;
@@ -185,9 +185,41 @@ public class EmpAction extends BaseAction {
 		Map<String, Object> session2 = context.getSession();
 		//把用户的信息放入session中
 		session2.put("user", emp1);
+		/*List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
+		getRoleAuthority(menus1,menus,list);
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		Set<Role> roles = emp1.getRoles();
+		for (Role role:roles) {
+			Set<Menu> menus = role.getMenus();
+
+		}*/
+
+
+
 		return MAIN;
 	}
-	
+	public  void getRoleAuthority(Set<Menu> menus1,Set<Menu> menus,List<Map<String,Object>> list){
+		if(menus!=null && menus.size()>0){
+			for (Menu menu:menus) {
+				Map<String,Object> map =new HashMap<String,Object>();
+				if(menus1!=null && menus1.size()>0){
+					for (Menu menu1:menus1) {
+						if(menu1.getMenuId() == menu.getMenuId()){
+							map.put("checked",true);
+							break;
+						}
+					}
+				}
+				map.put("id",menu.getMenuId());
+				map.put("pId",menu.getParentMenuId());
+				map.put("name",menu.getName());
+				list.add(map);
+				Set<Menu> menuMenus = menu.getMenus();
+				getRoleAuthority(menus1,menuMenus,list);
+			}
+		}
+	}
+
 
 	/**
 	 * 

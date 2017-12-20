@@ -192,9 +192,7 @@
 				$(this).css("background","white");
 			}
 		})
-		
 		//校验代码
-		
 		return isSubmit;
 	}
 	/**

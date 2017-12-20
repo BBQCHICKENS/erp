@@ -9,7 +9,8 @@
     <property name="depService" ref="depService"/> 
   </bean>  
   <bean id="roleAction" class="cn.tx.controller.RoleAction" scope="prototype"> 
-    <property name="roleService" ref="roleService"/> 
+    <property name="roleService" ref="roleService"/>
+    <property name="menuService" ref="menuService"/>
   </bean>  
   <bean id="supplierAction" class="cn.tx.controller.SupplierAction" scope="prototype"> 
     <property name="supplierService" ref="supplierService"/> 
@@ -42,7 +43,10 @@
   <bean id="storeAction" class="cn.tx.controller.StoreAction" scope="prototype"> 
     <property name="storeService" ref="storeService"/> 
   </bean>  
-  <bean id="storeDetailAction" class="cn.tx.controller.StoreDetailAction" scope="prototype">
-    <property name="storeDetailService" ref="storeDetailService"/>
+  <bean id="storeDetailAction" class="cn.tx.controller.StoreDetailAction" scope="prototype"> 
+    <property name="storeDetailService" ref="storeDetailService"/> 
+  </bean>  
+  <bean id="menuAction" class="cn.tx.controller.MenuAction" scope="prototype">
+    <property name="menuService" ref="menuService"/>
   </bean>
 </beans>
