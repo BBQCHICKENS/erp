@@ -36,12 +36,12 @@
 				<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td width="32%">
-							<a href="emp/changePwd.jsp" target="main">
+							<a href="${path}/emp_logout" target="main">
 								<img src="${path}/images/head-l.gif"	border="0" />
 							</a>
 						</td>
 						<td width="26%">
-							<a href="${path}/index2.jsp">
+							<a href="${path}/emp_logout">
 								<img src="${path}/images/head-m.gif"	border="0" />
 							</a>
 						</td>

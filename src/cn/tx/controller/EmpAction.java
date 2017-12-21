@@ -161,6 +161,11 @@ public class EmpAction extends BaseAction {
 
 		return SUCCESS;
 	}
+	public  String emp_logout(){
+		ActionContext context = ActionContext.getContext();
+		context.getSession().remove("user");
+		return  MAIN;
+	}
 	
 	/**
 	 * 登录
@@ -202,6 +207,10 @@ public class EmpAction extends BaseAction {
 				map.put("id",menu.getMenuId());
 				map.put("pId",menu.getParentMenuId());
 				map.put("name",menu.getName());
+				if(menu.getLevel()==3){
+					map.put("url","${path}/"+menu.getUrl());
+					map.put("target","main");
+				}
 				list.add(map);
 			}
 		}

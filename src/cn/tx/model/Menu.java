@@ -13,6 +13,24 @@ public class Menu {
     private Integer parentMenuId;
     private String name;
     private String url;
+    private Integer isMenu;
+    private  Integer level;
+
+    public Integer getIsMenu() {
+        return isMenu;
+    }
+
+    public void setIsMenu(Integer isMenu) {
+        this.isMenu = isMenu;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
 
     private  Set<Menu> menus;
 

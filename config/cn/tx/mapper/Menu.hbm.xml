@@ -11,6 +11,8 @@
         <property name="parentMenuId" column="parent_menu_id"/>
         <property name="name" column="name"/>
         <property name="url" column="url"/>
+        <property name="isMenu" column="is_menu"/>
+        <property name="level" column="level"/>
         <set name="menus">
             <key column="parent_menu_id"></key>
             <one-to-many  class="cn.tx.model.Menu"/>
