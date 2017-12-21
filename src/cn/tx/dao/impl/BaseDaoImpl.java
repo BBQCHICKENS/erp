@@ -69,7 +69,7 @@ public abstract class BaseDaoImpl<T, Q> extends HibernateDaoSupport implements B
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				List<T> list = (List<T>)query.setFirstResult((Integer)object).setMaxResults(5).list();
+				List<T> list = (List<T>)query.setFirstResult((Integer)object).setMaxResults(10).list();
 				return list;
 			}
 			
