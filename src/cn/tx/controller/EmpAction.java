@@ -203,8 +203,6 @@ public class EmpAction extends BaseAction {
 				map.put("pId",menu.getParentMenuId());
 				map.put("name",menu.getName());
 				list.add(map);
-				Set<Menu> menuMenus = menu.getMenus();
-				getRoleAuthority(menuMenus,list);
 			}
 		}
 	}
