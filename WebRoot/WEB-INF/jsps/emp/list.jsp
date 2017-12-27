@@ -110,7 +110,7 @@
 		</div>
 	</div>
 	<div class="content-text">
-		<form id="queryEmpForm" action="${path }/emp_list" method="post">
+		<form id="queryEmpForm" action="${path}/emp_list" method="post">
 		
 			
 			

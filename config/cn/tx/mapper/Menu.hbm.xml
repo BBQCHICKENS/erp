@@ -17,5 +17,7 @@
             <key column="parent_menu_id"></key>
             <one-to-many  class="cn.tx.model.Menu"/>
         </set>
+
+        <many-to-one name="menu" column="menu_id" insert="false" update="false"></many-to-one>
     </class>
 </hibernate-mapping>

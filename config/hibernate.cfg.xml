@@ -21,7 +21,5 @@
 		<mapping resource="cn/tx/mapper/StoreDetail.hbm.xml" />
 		<mapping resource="cn/tx/mapper/StoreLog.hbm.xml" />
 		<mapping resource="cn/tx/mapper/Menu.hbm.xml" />
-
 	</session-factory>
-
 </hibernate-configuration>

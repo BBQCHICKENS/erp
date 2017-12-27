@@ -23,11 +23,7 @@ public class MenuAction extends BaseAction {
 	}
 
 	private MenuService menuService;
-	
-	
-	
-	
-	
+
 	public MenuService getMenuService() {
 		return menuService;
 	}
@@ -55,6 +51,9 @@ public class MenuAction extends BaseAction {
 	}
 	
 	public String menu_input(){
+		return SUCCESS;
+	}
+	public String menu_update(){
 		return SUCCESS;
 	}
 	

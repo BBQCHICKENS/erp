@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 public class Menu {
-    private int menuId;
+    private Integer menuId;
     private Integer parentMenuId;
     private String name;
     private String url;
@@ -34,6 +34,16 @@ public class Menu {
 
     private  Set<Menu> menus;
 
+    private  Menu menu;
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
     public Set<Menu> getMenus() {
         return menus;
     }
@@ -44,11 +54,11 @@ public class Menu {
 
     @Id
     @Column(name = "menu_id")
-    public int getMenuId() {
+    public Integer getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(int menuId) {
+    public void setMenuId(Integer menuId) {
         this.menuId = menuId;
     }
 

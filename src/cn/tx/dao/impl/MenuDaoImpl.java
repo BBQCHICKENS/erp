@@ -17,15 +17,21 @@ public class MenuDaoImpl extends BaseDaoImpl<Menu, MenuQuery> implements MenuDao
 
 	@Override
 	public String createHqlCount(MenuQuery q) {
-	    String hql = "from Menu t where 1=1 ";
+	    String hql = "select count(menuId) from Menu t where 1=1 ";
 		hql = hql + createHqlCondition(q);
-		return null;
+		return hql;
 	}
 
 	@Override
 	public String createHqlCondition(MenuQuery q) {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "";
+		if(StringUtils.isNotBlank(q.getName())){
+			hql = hql + " and t.name like :name";
+		}
+		if(q.getParentMenuId()!=null){
+			hql = hql + " and t.parent_menu_id = :parentMenuId";
+		}
+		return hql;
 	}
 	
 
