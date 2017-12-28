@@ -13,7 +13,7 @@ public class MenuAction extends BaseAction {
 	
 	
 	private MenuQuery query = new MenuQuery();
-	
+
 	public MenuQuery getQuery() {
 		return query;
 	}
@@ -41,9 +41,12 @@ public class MenuAction extends BaseAction {
 		if(pageNo == null ){
 			query.setPageNo(1);
 		}
-		
 		Page page = menuService.queryObjByCondition(query, exclude);
-		
+
+		MenuQuery menuQuery =new MenuQuery();
+		menuQuery.setLevel(2);
+		List<Menu> menus = this.menuService.queryObjByConditionNoPage(menuQuery, exclude);
+		context.put("menus", menus);
 		context.put("page", page);
 		
 		

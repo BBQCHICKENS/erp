@@ -79,4 +79,9 @@ public class BaseServiceImpl<T, Q> implements BaseService<T, Q> {
 		return page;
 	}
 
+	@Override
+	public List<T> queryObjByConditionNoPage(Q q, List<String> exclude) {
+		return this.baseDao.queryObjByConditionNoPage(q,exclude);
+	}
+
 }

@@ -6,6 +6,8 @@ import cn.tx.dao.MenuDao;
 import cn.tx.model.Menu;
 import cn.tx.query.MenuQuery;
 
+import java.util.List;
+
 public class MenuDaoImpl extends BaseDaoImpl<Menu, MenuQuery> implements MenuDao {
 
 	@Override
@@ -29,10 +31,11 @@ public class MenuDaoImpl extends BaseDaoImpl<Menu, MenuQuery> implements MenuDao
 			hql = hql + " and t.name like :name";
 		}
 		if(q.getParentMenuId()!=null){
-			hql = hql + " and t.parent_menu_id = :parentMenuId";
+			hql = hql + " and t.parentMenuId = :parentMenuId";
 		}
+		if(q.getLevel()!=null){
+		    hql=hql+" and t.level = :level";
+        }
 		return hql;
 	}
-	
-
 }
